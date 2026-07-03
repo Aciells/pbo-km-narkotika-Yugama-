@@ -113,9 +113,37 @@ public class Putusan extends Perkara {
         return jumlahDibuat;
     }
 
+
+
+    /** Versi ringkas: satu baris */
+    public void tampilkan() {
+        System.out.printf("%-24s | %-20s | %-12s | %3d bln | Rp%,.0f%n",
+                getNomorPerkara(), namaTerdakwa, jenisNarkotika, vonisHukuman, vonisDenda);
+    }
+
+    /** Versi detail (overload) */
+    public void tampilkan(boolean detail) {
+        if (!detail) {
+            tampilkan();
+            return;
+        }
+        System.out.println("========================================");
+        System.out.println("Nomor Perkara   : " + getNomorPerkara());
+        System.out.println("Pengadilan      : " + getPengadilan());
+        System.out.println("Tanggal Putusan : " + getTanggalPutusan());
+        System.out.println("Nama Terdakwa   : " + namaTerdakwa + " (" + umurTerdakwa + " tahun)");
+        System.out.println("Jenis Narkotika : " + jenisNarkotika + " (" + beratBarangBukti + " gram)");
+        System.out.println("Pasal Dilanggar : " + pasalDilanggar);
+        System.out.println("Peran Terdakwa  : " + peranTerdakwa);
+        System.out.println("Vonis Hukuman   : " + vonisHukuman + " bulan");
+        System.out.println("Vonis Denda     : Rp" + String.format("%,.0f", vonisDenda));
+        System.out.println("Hakim Ketua     : " + getNamaHakim());
+        System.out.println("========================================");
+    }
+
     @Override
     public String getKategoriHukuman() {
-
+        // TODO: logika kategori (commit berikutnya)
         return null;
     }
 }
