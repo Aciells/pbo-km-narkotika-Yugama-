@@ -24,4 +24,8 @@ public class ConsoleView {
         System.out.println("=============================================");
         return InputHandler.validasiPilihan("Pilih menu: ", 0, 6, sc);
     }
+
+    public void tampilkanPesan(String pesan) {
+        System.out.println(">> " + pesan);
+    }
 }
