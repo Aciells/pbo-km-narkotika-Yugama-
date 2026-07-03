@@ -1,6 +1,12 @@
 package model;
 
-public class Putusan extends Perkara {
+import java.util.Objects;
+
+/**
+ * Entity utama: merepresentasikan satu putusan pengadilan narkotika.
+ * (Versi awal: baru field, constructor, getter/setter tanpa validasi)
+ */
+public class Putusan extends Perkara implements Comparable<Putusan> {
 
     private String namaTerdakwa;
     private int umurTerdakwa;
@@ -13,11 +19,13 @@ public class Putusan extends Perkara {
 
     private static int jumlahDibuat = 0;
 
+    // Constructor 1: no-arg
     public Putusan() {
         super();
         jumlahDibuat++;
     }
 
+    // Constructor 2: parameterized
     public Putusan(String nomorPerkara, String pengadilan, String tanggalPutusan, String namaHakim,
                    String namaTerdakwa, int umurTerdakwa, String jenisNarkotika, double beratBarangBukti,
                    String pasalDilanggar, String peranTerdakwa, int vonisHukuman, double vonisDenda) {
@@ -114,6 +122,7 @@ public class Putusan extends Perkara {
     }
 
 
+    // ===== Method Overloading (2 method nama sama, parameter beda) =====
 
     /** Versi ringkas: satu baris */
     public void tampilkan() {
@@ -141,9 +150,40 @@ public class Putusan extends Perkara {
         System.out.println("========================================");
     }
 
+    // ===== Overriding (getKategoriHukuman, toString, compareTo, equals, hashCode) =====
+
     @Override
     public String getKategoriHukuman() {
-        // TODO: logika kategori (commit berikutnya)
-        return null;
+        if (vonisHukuman <= 12) {
+            return "Ringan";
+        } else if (vonisHukuman <= 60) {
+            return "Sedang";
+        } else {
+            return "Berat";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Putusan{" + getNomorPerkara() + ", " + namaTerdakwa + ", " + jenisNarkotika
+                + ", vonis=" + vonisHukuman + " bulan}";
+    }
+
+    @Override
+    public int compareTo(Putusan other) {
+        return Integer.compare(this.vonisHukuman, other.vonisHukuman);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Putusan)) return false;
+        Putusan p = (Putusan) o;
+        return Objects.equals(getNomorPerkara(), p.getNomorPerkara());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNomorPerkara());
     }
 }
