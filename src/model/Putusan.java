@@ -11,12 +11,13 @@ public class Putusan extends Perkara {
     private int vonisHukuman; // bulan
     private double vonisDenda; // rupiah
 
-    // Constructor 1: no-arg
+    private static int jumlahDibuat = 0;
+
     public Putusan() {
         super();
+        jumlahDibuat++;
     }
 
-    // Constructor 2: parameterized
     public Putusan(String nomorPerkara, String pengadilan, String tanggalPutusan, String namaHakim,
                    String namaTerdakwa, int umurTerdakwa, String jenisNarkotika, double beratBarangBukti,
                    String pasalDilanggar, String peranTerdakwa, int vonisHukuman, double vonisDenda) {
@@ -29,6 +30,7 @@ public class Putusan extends Perkara {
         this.peranTerdakwa = peranTerdakwa;
         this.vonisHukuman = vonisHukuman;
         this.vonisDenda = vonisDenda;
+        jumlahDibuat++;
     }
 
     public String getNamaTerdakwa() {
@@ -93,6 +95,10 @@ public class Putusan extends Perkara {
 
     public void setVonisDenda(double vonisDenda) {
         this.vonisDenda = vonisDenda;
+    }
+
+    public static int getJumlahDibuat() {
+        return jumlahDibuat;
     }
 
     @Override
